@@ -13,24 +13,17 @@ defaults:
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
 
-tags: ["grass", "unetmobv2"]
+tags: ["grasseg", "unetmobv2"]
 
 seed: 42
 
 
-  # scheduler:
-  #   _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
-  #   _partial_: true
-  #   mode: min
-  #   factor: 0.1
-  #   patience: 10
-
 logger:
   wandb:
-    project: "hrcwhu"
+    project: "grasseg"
     name: "unetmobv2"
   aim:
-    experiment: "hrcwhu_unetmobv2"
+    experiment: "grasseg_unetmobv2"
 
 callbacks:
   model_checkpoint:
