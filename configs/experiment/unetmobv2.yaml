@@ -1,3 +1,8 @@
+# @package _global_
+
+# to execute this experiment run:
+# python train.py experiment=example
+
 defaults:
   - override /trainer: gpu
   - override /data: grass
@@ -5,16 +10,27 @@ defaults:
   - override /logger: wandb
   - override /callbacks: default
 
-tags: ["grasseg", "unetmobv2"]
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+
+tags: ["hrcWhu", "unetmobv2"]
 
 seed: 42
 
+
+  # scheduler:
+  #   _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
+  #   _partial_: true
+  #   mode: min
+  #   factor: 0.1
+  #   patience: 10
+
 logger:
   wandb:
-    project: "grasseg"
+    project: "hrcwhu"
     name: "unetmobv2"
   aim:
-    experiment: "grasseg_unetmobv2"
+    experiment: "hrcwhu_unetmobv2"
 
 callbacks:
   model_checkpoint:
