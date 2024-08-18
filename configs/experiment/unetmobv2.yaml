@@ -1,0 +1,31 @@
+defaults:
+  - override /trainer: gpu
+  - override /data: grass
+  - override /model: unetmobv2
+  - override /logger: wandb
+  - override /callbacks: default
+
+tags: ["grasseg", "unetmobv2"]
+
+seed: 42
+
+logger:
+  wandb:
+    project: "grasseg"
+    name: "unetmobv2"
+  aim:
+    experiment: "grasseg_unetmobv2"
+
+callbacks:
+  model_checkpoint:
+    dirpath: ${paths.output_dir}/checkpoints
+    filename: "epoch_{epoch:03d}"
+    monitor: "val/loss"
+    mode: "min"
+    save_last: True
+    auto_insert_metric_name: False
+
+  early_stopping:
+    monitor: "val/loss"
+    patience: 10
+    mode: "min"
