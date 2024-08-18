@@ -8,7 +8,7 @@ setup(
     description="遥感草地语义分割,测量草地覆盖度",
     author="",
     author_email="",
-    url="https://github.com/user/project",
+    url="https://github.com/caixiaoshun/grasseg.git",
     install_requires=["lightning", "hydra-core"],
     packages=find_packages(),
     # use this to customize global commands available in the terminal after installing the package
