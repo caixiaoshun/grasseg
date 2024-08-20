@@ -22,6 +22,7 @@ class AELitModule(LightningModule):
         super().__init__()
         self.save_hyperparameters(ignore=['net'])
         self.net = net
+        self.example_input_array = torch.zeros(size=(2,3,256,256))
 
         self.train_acc = MulticlassAccuracy(num_classes=self.hparams.num_classes, average="macro")
         self.train_precision = Precision(task="multiclass", num_classes=self.hparams.num_classes, average="macro")
