@@ -10,7 +10,7 @@ num_classes: 6
 
 criterion:
   _target_: src.loss.cross_entropy_with_aux.CrossEntropyWithAux
-  scale: 0.4
+  # scale: 0.4
 
 optimizer:
   _target_: torch.optim.AdamW
