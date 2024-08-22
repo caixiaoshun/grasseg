@@ -2,7 +2,7 @@ import torch
 import torchvision
 from torch import nn as nn
 from collections import OrderedDict
-from typing import Literal,Union
+from typing import Literal, Union
 
 
 class FCNVGG16(nn.Module):
@@ -264,7 +264,7 @@ class FCN(nn.Module):
                 self.backbone.classifier[-1] = nn.Conv2d(in_channels, num_classes, 1, 1)
             else:
                 self.backbone = torchvision.models.segmentation.fcn_resnet101(
-                    weights=None, num_classes=num_classes
+                    weights=None, num_classes=num_classes, aux_loss=True
                 )
         elif backbone == "resnet50":
 
@@ -276,13 +276,15 @@ class FCN(nn.Module):
                 self.backbone.classifier[-1] = nn.Conv2d(in_channels, num_classes, 1, 1)
             else:
                 self.backbone = torchvision.models.segmentation.fcn_resnet50(
-                    weights=None, num_classes=num_classes
+                    weights=None, num_classes=num_classes, aux_loss=True
                 )
         elif backbone == "vgg16":
             self.backbone = FCNVGG16(num_classes=num_classes)
-        
-        else:
-            raise ValueError(f"backbone should in ['resnet101', 'resnet50','vgg16'],but actually is {backbone}")
 
-    def forward(self, x: torch.Tensor) -> Union[OrderedDict,torch.Tensor]:
+        else:
+            raise ValueError(
+                f"backbone should in ['resnet101', 'resnet50','vgg16'],but actually is {backbone}"
+            )
+
+    def forward(self, x: torch.Tensor) -> Union[OrderedDict, torch.Tensor]:
         return self.backbone(x)
