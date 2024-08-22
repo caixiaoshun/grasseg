@@ -1,8 +1,10 @@
 _target_: src.models.ae_module_allclasses.AELitModule
 
 net:
-  _target_: src.models.components.fcn_resnet101.FCN_RESNET101
+  _target_: src.models.components.fcn.FCN
   num_classes: 6
+  backbone: "resnet101"
+  pretrain: true
 
 num_classes: 6
 
