@@ -1,0 +1,22 @@
+_target_: src.models.ae_module_allclasses.AELitModule
+
+net:
+  _target_: src.models.components.fcn_resnet101.FCN_RESNET101
+  num_classes: 6
+
+num_classes: 6
+
+criterion:
+  _target_: src.loss.cross_entropy_with_aux.CrossEntropyWithAux
+
+optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: true
+  lr: 0.0001
+
+scheduler:
+  _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
+  _partial_: true
+  mode: min
+  factor: 0.5
+  patience: 10
