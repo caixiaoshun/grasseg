@@ -8,9 +8,6 @@ train_pipeline:
         p: 0.5
       - _target_: albumentations.ShiftScaleRotate
         p: 1
-      - _target_: albumentations.RandomCrop
-        height: 256
-        width: 256
         always_apply: true
       - _target_: albumentations.GaussNoise
         p: 0.2
@@ -50,12 +47,7 @@ train_pipeline:
 
   ann_transform: null
 val_pipeline:
-  all_transform:
-    _target_: albumentations.Compose
-    transforms:
-      - _target_: albumentations.Resize
-        height: 256
-        width: 256
+  all_transform: null
 
   img_transform:
     _target_: albumentations.Compose
@@ -65,12 +57,7 @@ val_pipeline:
   ann_transform: null
 
 test_pipeline:
-  all_transform:
-    _target_: albumentations.Compose
-    transforms:
-      - _target_: albumentations.Resize
-        height: 256
-        width: 256
+  all_transform: null
 
   img_transform:
     _target_: albumentations.Compose
