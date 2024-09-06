@@ -7,7 +7,7 @@
 
 import os
 from glob import glob
-
+from typing import Literal
 import albumentations
 import numpy as np
 from PIL import Image
@@ -16,33 +16,39 @@ from torch.utils.data import Dataset
 
 class Grass(Dataset):
     METAINFO = dict(
-        classes=('背景', '低覆盖度', '中低覆盖度', '中覆盖度', '中高覆盖度', '高覆盖度'),
-        palette=("#ffffff",  # 白色    背景
-                 "#a8d5ba",  # 浅绿
-                 "#6cc551",  # 中浅绿
-                 "#4caf50",  # 中绿
-                 "#388e3c",  # 中深绿
-                 "#1b5e20"  # 深绿
-                 ),
+        classes=("背景", "低覆盖度", "中覆盖度", "高覆盖度"),
+        palette=(
+            (255, 255, 255),  # 白色    荒地
+            (173, 255, 173),  # 浅绿    低覆盖度
+            (60, 179, 113),  # 中绿   中覆盖度
+            (0, 128, 0),  # 深绿     高覆盖度
+        ),
         img_size=(256, 256),  # H, W
         ann_size=(256, 256),  # H, W
-        train_size=120,
-        test_size=30,
     )
 
-    def __init__(self, root: str, all_transform: albumentations.Compose = None,
-                 img_transform: albumentations.Compose = None,
-                 ann_transform: albumentations.Compose = None):
+    def __init__(
+        self,
+        root: str,
+        phase:Literal["train","val"] = "train",
+        all_transform: albumentations.Compose = None,
+        img_transform: albumentations.Compose = None,
+        ann_transform: albumentations.Compose = None,
+    ):
         self.root = root
+        self.phase = phase
         self.all_transform = all_transform
         self.img_transform = img_transform
         self.ann_transform = ann_transform
         self.image_paths, self.mask_paths = self.__load_data()
 
     def __load_data(self):
-        filenames = glob(os.path.join(self.root, "img", "*.tif"))
-        masks = [filename.replace("img", "mask").replace("tif", "png") for filename in filenames]
-        return filenames, masks
+        image_paths = glob(os.path.join(self.root, self.phase,"img","*.tif"))
+        masks = [
+            filename.replace("img", "ann")
+            for filename in image_paths
+        ]
+        return image_paths, masks
 
     def __len__(self):
         return len(self.image_paths)
@@ -58,12 +64,12 @@ class Grass(Dataset):
 
         if self.all_transform is not None:
             transformed = self.all_transform(image=image, mask=mask)
-            image = transformed['image']
-            mask = transformed['mask']
+            image = transformed["image"]
+            mask = transformed["mask"]
         if self.img_transform is not None:
-            image = self.img_transform(image=image)['image']
+            image = self.img_transform(image=image)["image"]
         if self.ann_transform is not None:
-            mask = self.ann_transform(image=mask)['image']
+            mask = self.ann_transform(image=mask)["image"]
 
         return {
             "image": image,
@@ -72,8 +78,10 @@ class Grass(Dataset):
         }
 
 
-if __name__ == '__main__':
-    dataset = Grass(root='data/grass', all_transform=None, img_transform=None, ann_transform=None)
+if __name__ == "__main__":
+    dataset = Grass(
+        root="data/grass", all_transform=None, img_transform=None, ann_transform=None
+    )
     print(len(dataset))
     data = dataset[0]
-    print(data['image'].shape, data['mask'].shape, data['filename'])
+    print(data["image"].shape, data["mask"].shape, data["filename"])
