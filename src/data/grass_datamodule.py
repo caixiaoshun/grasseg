@@ -81,20 +81,17 @@ class GRASSDataModule(LightningDataModule):
             total_nums = len(dataset)
             train_size = int(total_nums * self.hparams.train_ratio)
             val_size = total_nums - train_size
-            self.train_dataset, self.val_dataset = torch.utils.data.random_split(
-                dataset, [train_size, val_size],
-                generator=torch.Generator().manual_seed(42),
+            self.train_dataset = Grass(
+                root=self.hparams.root,
+                phase="train"
+                **self.train_pipeline,
             )
-
-            self.val_dataset.all_transform = self.val_pipeline['all_transform']
-            self.val_dataset.ann_transform = self.val_pipeline['ann_transform']
-            self.val_dataset.img_transform = self.val_pipeline['img_transform']
-
+            self.val_dataset = Grass(
+                root=self.hparams.root,
+                phase="val"
+                **self.val_pipeline,
+            )
             self.test_dataset = self.val_dataset
-
-            self.test_dataset.all_transform = self.test_pipeline['all_transform']
-            self.test_dataset.ann_transform = self.test_pipeline['ann_transform']
-            self.test_dataset.img_transform = self.test_pipeline['img_transform']
 
     def train_dataloader(self) -> DataLoader[Any]:
         """Create and return the train dataloader.
