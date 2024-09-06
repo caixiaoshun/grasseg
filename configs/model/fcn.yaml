@@ -2,18 +2,18 @@ _target_: src.models.ae_module_allclasses.AELitModule
 
 net:
   _target_: src.models.components.fcn.FCN
-  num_classes: 6
+  num_classes: 4
   backbone: "resnet101"
   pretrain: true
 
-num_classes: 6
+num_classes: 4
 
 criterion:
   _target_: src.loss.cross_entropy_with_aux.CrossEntropyWithAux
   # scale: 0.4
 
 optimizer:
-  _target_: torch.optim.AdamW
+  _target_: torch.optim.Adam
   _partial_: true
   lr: 0.0001
 
