@@ -74,13 +74,6 @@ class GRASSDataModule(LightningDataModule):
 
         # load and split datasets only if not loaded already
         if not self.train_dataset and not self.val_dataset and not self.test_dataset:
-            dataset = Grass(
-                root=self.hparams.root,
-                **self.train_pipeline,
-            )
-            total_nums = len(dataset)
-            train_size = int(total_nums * self.hparams.train_ratio)
-            val_size = total_nums - train_size
             self.train_dataset = Grass(
                 root=self.hparams.root,
                 phase="train"
