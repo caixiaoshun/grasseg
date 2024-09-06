@@ -76,12 +76,12 @@ class GRASSDataModule(LightningDataModule):
         if not self.train_dataset and not self.val_dataset and not self.test_dataset:
             self.train_dataset = Grass(
                 root=self.hparams.root,
-                phase="train"
+                phase="train",
                 **self.train_pipeline,
             )
             self.val_dataset = Grass(
                 root=self.hparams.root,
-                phase="val"
+                phase="val",
                 **self.val_pipeline,
             )
             self.test_dataset = self.val_dataset
