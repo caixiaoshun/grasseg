@@ -22,8 +22,6 @@ logger:
   wandb:
     project: "grasseg"
     name: "unetmobv2"
-  aim:
-    experiment: "grasseg_unetmobv2"
 
 callbacks:
   model_checkpoint:

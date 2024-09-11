@@ -22,8 +22,6 @@ logger:
   wandb:
     project: "grasseg"
     name: "scnn"
-  aim:
-    experiment: "grasseg_scnn"
 
 callbacks:
   model_checkpoint:
