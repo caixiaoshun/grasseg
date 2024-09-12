@@ -1,0 +1,14 @@
+import torch
+from torchgeo.models.farseg import FarSeg as FarSegBase
+
+class Farseg(torch.nn.Module):
+    def __init__(self,backbone='resnet50',num_classes=6,backbone_pretrained=True):
+        super().__init__()
+        self.backbone = FarSegBase(
+            backbone=backbone,
+            classes=num_classes,
+            backbone_pretrained=backbone_pretrained
+        )
+        
+    def forward(self, x):
+        return self.backbone(x)
