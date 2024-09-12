@@ -101,6 +101,7 @@ def split_dataset(
     os.makedirs(os.path.join(output_path, "val", "ann"), exist_ok=True)
 
     create_dataset(image_train, ann_train, "train", output_path)
+    create_dataset(image_test, ann_test, "val", output_path)
 
 def main():
     args = argparse.ArgumentParser()
