@@ -18,6 +18,8 @@ def get_args()->Tuple[str,str]:
     args = parser.parse_args()
     root = args.root
     phase = args.phase
+    assert os.path.exists(root), f"root directory {root} does not exist"
+    assert phase in ["train","val","test"], f"phase {phase} is not valid"
     return root, phase
 
 def main():
@@ -41,9 +43,10 @@ def main():
 
     im = Image.fromarray(grid_images)
 
-    im.save(f"grass_{phase}.png",dpi=(300,300))
+    im.save(f"images/dataset_vis/grass_{phase}.png",dpi=(300,300))
 
-    print(f"Saved {len(image_paths)} images to grass_{phase}.png")
+    print(f"Saved {len(image_paths)} images to images/dataset_vis/grass_{phase}.png")
 
 if __name__ == '__main__':
+    # 使用示例: python src/tools/dataset_visiual.py --root data/grass --phase train
     main()
