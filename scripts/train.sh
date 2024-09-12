@@ -1,25 +1,29 @@
 #!/bin/bash
 
-# 使用示例: bash scripts/train.sh logger=wandb devices="[0,1,2,3]"
+# 使用示例: bash scripts/train.sh logger=wandb devices="[0,1,2,3]" max_epochs=50
 # 默认参数
 LOGGER="wandb"
 DEVICES="[0]"
+MAX_EPOCHS=100
 
 # 解析命令行传递的参数
 for arg in "$@"
 do
     case $arg in
         logger=*)
-        LOGGER="${arg#*=}"
-        shift
-        ;;
+            LOGGER="${arg#*=}"
+            ;;
         devices=*)
-        DEVICES="${arg#*=}"
-        shift
-        ;;
+            DEVICES="${arg#*=}"
+            ;;
+        max_epochs=*)
+            MAX_EPOCHS="${arg#*=}"
+            ;;
         *)
-        # 其它未处理的参数
-        ;;
+            # 不支持的参数
+            echo "不支持的参数: $arg"
+            exit 1
+            ;;
     esac
 done
 
@@ -30,5 +34,5 @@ experiments=("farseg_resnet18" "farseg_resnet34" "farseg_resnet50" "farseg_resne
 for experiment in "${experiments[@]}"
 do
   echo "开始训练: $experiment 使用 $LOGGER 在设备 $DEVICES"
-  python src/train.py experiment=$experiment trainer.devices=$DEVICES logger=$LOGGER
+  python src/train.py experiment=$experiment trainer.devices=$DEVICES logger=$LOGGER trainer.max_epochs=$MAX_EPOCHS
 done
