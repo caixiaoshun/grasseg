@@ -1,9 +1,10 @@
 _target_: src.models.ae_module.AELitModule
 
 net:
-  _target_: src.models.components.unetmobv2.UNetMobV2
+  _target_: src.models.components.farseg.Farseg
   num_classes: 6
-  in_channels: 3
+  backbone: "resnet18"
+  backbone_pretrained: true
 
 num_classes: 6
 
