@@ -7,7 +7,7 @@ defaults:
   - override /trainer: gpu
   - override /data: grass
   - override /model: scnn
-  - override /logger: wandb
+  - override /logger: tebsorboard
   - override /callbacks: default
 
 # all parameters below will be merged with parameters from default configurations set above
@@ -31,8 +31,3 @@ callbacks:
     mode: "min"
     save_last: True
     auto_insert_metric_name: False
-
-  early_stopping:
-    monitor: "val/loss"
-    patience: 10
-    mode: "min"
