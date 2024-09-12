@@ -8,8 +8,7 @@ from typing import Any, Dict, Tuple
 
 import torch
 from lightning import LightningModule
-from prettytable import PrettyTable
-from torchmetrics import MeanMetric
+from torchmetrics import MeanMetric, MetricCollection
 from torchmetrics.classification import MulticlassAccuracy, Precision, F1Score
 from torchmetrics.segmentation import MeanIoU, GeneralizedDiceScore
 from collections import OrderedDict
@@ -25,6 +24,7 @@ class AELitModule(LightningModule):
         criterion: torch.nn.Module,
         optimizer: torch.optim.Optimizer,
         scheduler: torch.optim.lr_scheduler,
+        average: str = "macro",
         compile: bool = False,
     ):
         super().__init__()
@@ -32,45 +32,38 @@ class AELitModule(LightningModule):
         self.net = net
         self.example_input_array = torch.zeros(size=(2, 3, 256, 256))
 
-        self.train_acc = MulticlassAccuracy(
-            num_classes=self.hparams.num_classes, average="macro"
+        self.train_metrics = self.get_metrics(
+            prefix="train", task="multiclass", averge=self.hparams.average
         )
-        self.train_precision = Precision(
-            task="multiclass", num_classes=self.hparams.num_classes, average="macro"
+        self.val_metrics = self.get_metrics(
+            prefix="val", task="multiclass", averge=self.hparams.average
         )
-        self.train_f1 = F1Score(
-            task="multiclass", num_classes=self.hparams.num_classes, average="macro"
+        self.test_metrics = self.get_metrics(
+            prefix="test", task="multiclass", averge=self.hparams.average
         )
-        self.train_iou = MeanIoU(num_classes=self.hparams.num_classes)
-        self.train_dice = GeneralizedDiceScore(num_classes=self.hparams.num_classes)
-
-        self.val_acc = MulticlassAccuracy(
-            num_classes=self.hparams.num_classes, average="macro"
-        )
-        self.val_precision = Precision(
-            task="multiclass", num_classes=self.hparams.num_classes, average="macro"
-        )
-        self.val_f1 = F1Score(
-            task="multiclass", num_classes=self.hparams.num_classes, average="macro"
-        )
-        self.val_iou = MeanIoU(num_classes=self.hparams.num_classes)
-        self.val_dice = GeneralizedDiceScore(num_classes=self.hparams.num_classes)
-
-        self.test_acc = MulticlassAccuracy(
-            num_classes=self.hparams.num_classes, average="macro"
-        )
-        self.test_precision = Precision(
-            task="multiclass", num_classes=self.hparams.num_classes, average="macro"
-        )
-        self.test_f1 = F1Score(
-            task="multiclass", num_classes=self.hparams.num_classes, average="macro"
-        )
-        self.test_iou = MeanIoU(num_classes=self.hparams.num_classes)
-        self.test_dice = GeneralizedDiceScore(num_classes=self.hparams.num_classes)
 
         self.train_loss = MeanMetric()
         self.val_loss = MeanMetric()
         self.test_loss = MeanMetric()
+
+    def get_metrics(self, prefix: str = "train", averge="macro", task="multiclass"):
+        return MetricCollection(
+            {
+                f"{prefix}/acc": MulticlassAccuracy(
+                    num_classes=self.hparams.num_classes, average=averge
+                ),
+                f"{prefix}/precision": Precision(
+                    task=task, num_classes=self.hparams.num_classes, average=averge
+                ),
+                f"{prefix}/f1Score": F1Score(
+                    task=task, num_classes=self.hparams.num_classes, average=averge
+                ),
+                f"{prefix}/iou": MeanIoU(num_classes=self.hparams.num_classes),
+                f"{prefix}/dice": GeneralizedDiceScore(
+                    num_classes=self.hparams.num_classes
+                ),
+            }
+        )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """Perform a forward pass through the model `self.net`.
@@ -82,25 +75,12 @@ class AELitModule(LightningModule):
 
     def on_train_start(self) -> None:
         """Lightning hook that is called when training begins."""
-        self.train_acc.reset()
-        self.train_precision.reset()
-        self.train_f1.reset()
-        self.train_iou.reset()
-        self.train_dice.reset()
+        self.train_metrics.reset()
+        self.val_metrics.reset()
+        self.val_metrics.reset()
+
         self.train_loss.reset()
-
-        self.val_acc.reset()
-        self.val_precision.reset()
-        self.val_f1.reset()
-        self.val_iou.reset()
-        self.val_dice.reset()
         self.val_loss.reset()
-
-        self.test_acc.reset()
-        self.test_precision.reset()
-        self.test_f1.reset()
-        self.test_iou.reset()
-        self.test_dice.reset()
         self.test_loss.reset()
 
     def model_step(
@@ -117,12 +97,8 @@ class AELitModule(LightningModule):
         """
         x, y = batch["image"], batch["mask"]
         logits = self.forward(x)
-        if isinstance(logits, OrderedDict):
-            loss = self.hparams.criterion(logits["out"], logits["aux"], y)
-            preds = torch.argmax(logits["out"], dim=1)
-        else:
-            loss = self.hparams.criterion(logits, y)
-            preds = torch.argmax(logits, dim=1)
+        loss = self.hparams.criterion(logits, y)
+        preds = torch.argmax(logits, dim=1)
         return loss, preds, y
 
     def training_step(self, batch: Dict, batch_idx: int) -> torch.Tensor:
@@ -135,34 +111,10 @@ class AELitModule(LightningModule):
         """
         loss, preds, targets = self.model_step(batch)
         self.train_loss(loss)
-        self.train_acc(preds, targets)
-        self.train_precision(preds, targets)
-        self.train_f1(preds, targets)
-        self.train_iou(preds, targets)
-        self.train_dice(preds, targets)
+        self.train_metrics(preds, targets)
 
-        self.log(
-            "train/loss", self.train_loss, on_step=False, on_epoch=True, prog_bar=True
-        )
-        self.log(
-            "train/macc", self.train_acc, on_step=False, on_epoch=True, prog_bar=True
-        )
-        self.log(
-            "train/mprecision",
-            self.train_precision,
-            on_step=False,
-            on_epoch=True,
-            prog_bar=True,
-        )
-        self.log(
-            "train/mf1score", self.train_f1, on_step=False, on_epoch=True, prog_bar=True
-        )
-        self.log(
-            "train/miou", self.train_iou, on_step=False, on_epoch=True, prog_bar=True
-        )
-        self.log(
-            "train/mdice", self.train_dice, on_step=False, on_epoch=True, prog_bar=True
-        )
+        self.log("train/loss", self.train_loss, on_step=False, on_epoch=True, prog_bar=True)
+        self.log_dict(self.train_metrics, on_step=False, on_epoch=True, prog_bar=True)
         return loss
 
     def validation_step(self, batch: Dict, batch_idx: int) -> None:
@@ -175,28 +127,10 @@ class AELitModule(LightningModule):
         loss, preds, targets = self.model_step(batch)
 
         self.val_loss(loss)
-        self.val_acc(preds, targets)
-        self.val_precision(preds, targets)
-        self.val_f1(preds, targets)
-        self.val_iou(preds, targets)
-        self.val_dice(preds, targets)
+        self.val_metrics(preds, targets)
 
         self.log("val/loss", self.val_loss, on_step=False, on_epoch=True, prog_bar=True)
-        self.log("val/macc", self.val_acc, on_step=False, on_epoch=True, prog_bar=True)
-        self.log(
-            "val/mprecision",
-            self.val_precision,
-            on_step=False,
-            on_epoch=True,
-            prog_bar=True,
-        )
-        self.log(
-            "val/mf1score", self.val_f1, on_step=False, on_epoch=True, prog_bar=True
-        )
-        self.log("val/miou", self.val_iou, on_step=False, on_epoch=True, prog_bar=True)
-        self.log(
-            "val/mdice", self.val_dice, on_step=False, on_epoch=True, prog_bar=True
-        )
+        self.log_dict(self.val_metrics, on_step=False, on_epoch=True, prog_bar=True)
 
     def test_step(self, batch: Dict, batch_idx: int) -> None:
         """Perform a single test step on a batch of data from the test set.
@@ -208,34 +142,12 @@ class AELitModule(LightningModule):
         loss, preds, targets = self.model_step(batch)
 
         self.test_loss(loss)
-        self.test_acc(preds, targets)
-        self.test_precision(preds, targets)
-        self.test_f1(preds, targets)
-        self.test_iou(preds, targets)
-        self.test_dice(preds, targets)
+        self.test_metrics(preds, targets)
 
         self.log(
             "test/loss", self.test_loss, on_step=False, on_epoch=True, prog_bar=True
         )
-        self.log(
-            "test/macc", self.test_acc, on_step=False, on_epoch=True, prog_bar=True
-        )
-        self.log(
-            "test/mprecision",
-            self.test_precision,
-            on_step=False,
-            on_epoch=True,
-            prog_bar=True,
-        )
-        self.log(
-            "test/mf1score", self.test_f1, on_step=False, on_epoch=True, prog_bar=True
-        )
-        self.log(
-            "test/miou", self.test_iou, on_step=False, on_epoch=True, prog_bar=True
-        )
-        self.log(
-            "test/mdice", self.test_dice, on_step=False, on_epoch=True, prog_bar=True
-        )
+        self.log_dict(self.test_metrics, on_step=False, on_epoch=True, prog_bar=True)
 
     def setup(self, stage: str) -> None:
         """Lightning hook that is called at the beginning of fit (train + validate), validate,
