@@ -8,7 +8,7 @@ from PIL import Image
 import torch
 import torchvision
 import argparse
-from src.utils.draw import give_colors_to_mask,pasteImages
+from src.utils.draw import give_colors_to_mask,pasteImages,draw_text_in_image
 
 def get_args()->Tuple[str,str]:
     parser = argparse.ArgumentParser(description='Dataset Visualizer')
@@ -32,6 +32,8 @@ def main():
         mask = np.array(Image.open(ann_path))
         color_mask = give_colors_to_mask(image, mask, num_classes=6)
         image_mask = pasteImages([image, color_mask])
+
+        image_mask = draw_text_in_image(image_mask, f"{image_path.split('/')[-1]}", (10, 10), color="red")
         image_mask = np.transpose(image_mask, (2,0,1))[np.newaxis]
         if show_images is None:
             show_images = image_mask

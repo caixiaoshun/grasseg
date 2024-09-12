@@ -1,9 +1,18 @@
 import numpy as np
-from PIL import Image
+from PIL import Image,ImageDraw, ImageFont
 from typing import List
 import torch
 import torchvision
 
+def draw_text_in_image(image: np.ndarray, text: str, position: tuple, color: tuple):
+    """
+    在图片上绘制文字
+    """
+    img = Image.fromarray(image)
+    draw = ImageDraw.Draw(img)
+    font = ImageFont.load_default()
+    draw.text(position, text, fill=color, font=font)
+    return np.array(img)
 
 def pasteImages(images: List[np.ndarray]):
     """
