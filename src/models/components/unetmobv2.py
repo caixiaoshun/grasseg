@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-# @Time    : 2024/8/18 下午4:19
-# @Author  : xiaoshun
-# @Email   : 3038523973@qq.com
-# @File    : unetmobv2.py
-# @Software: PyCharm
 import segmentation_models_pytorch as smp
 import torch
 from torch import nn as nn
