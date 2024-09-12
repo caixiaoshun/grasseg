@@ -20,7 +20,6 @@ class GRASSDataModule(LightningDataModule):
             train_pipeline: Dict = None,
             val_pipeline: Dict = None,
             test_pipeline: Dict = None,
-            train_ratio: float = 0.8,
             batch_size: int = 1,
             num_workers: int = 0,
             pin_memory: bool = False,

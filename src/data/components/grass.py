@@ -16,12 +16,14 @@ from torch.utils.data import Dataset
 
 class Grass(Dataset):
     METAINFO = dict(
-        classes=("背景", "低覆盖度", "中覆盖度", "高覆盖度"),
+        classes=("背景", "低覆盖度", "中低覆盖度","中覆盖度", "中高覆盖度", "高覆盖度"),
         palette=(
-            (255, 255, 255),  # 白色    荒地
-            (173, 255, 173),  # 浅绿    低覆盖度
-            (60, 179, 113),  # 中绿   中覆盖度
-            (0, 128, 0),  # 深绿     高覆盖度
+            (255, 255, 255),  #  荒地
+            (173, 255, 47),  #  低覆盖度
+            (144, 238, 144),  # 中低覆盖度
+            (60, 179, 113),  #  中覆盖度
+            (34, 139, 34),   #  中高覆盖度
+            (0, 100, 0),     #  高覆盖度
         ),
         img_size=(256, 256),  # H, W
         ann_size=(256, 256),  # H, W
@@ -30,7 +32,7 @@ class Grass(Dataset):
     def __init__(
         self,
         root: str,
-        phase:Literal["train","val"] = "train",
+        phase: Literal["train", "val"] = "train",
         all_transform: albumentations.Compose = None,
         img_transform: albumentations.Compose = None,
         ann_transform: albumentations.Compose = None,
@@ -43,11 +45,8 @@ class Grass(Dataset):
         self.image_paths, self.mask_paths = self.__load_data()
 
     def __load_data(self):
-        image_paths = glob(os.path.join(self.root, self.phase,"img","*.tif"))
-        masks = [
-            filename.replace("img", "ann")
-            for filename in image_paths
-        ]
+        image_paths = glob(os.path.join(self.root, self.phase, "img", "*.tif"))
+        masks = [filename.replace("img", "ann") for filename in image_paths]
         return image_paths, masks
 
     def __len__(self):
