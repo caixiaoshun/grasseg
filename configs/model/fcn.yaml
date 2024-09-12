@@ -9,7 +9,7 @@ net:
 num_classes: 4
 
 criterion:
-  _target_: src.loss.cross_entropy_with_aux.CrossEntropyWithAux
+  _target_: torch.nn.CrossEntropyLoss
 
 optimizer:
   _target_: torch.optim.Adam
