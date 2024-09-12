@@ -2,7 +2,7 @@
 
 # 默认参数
 LOGGER="wandb"
-DEVICES="[1]"
+DEVICES="[0]"
 
 # 解析命令行传递的参数
 for arg in "$@"
