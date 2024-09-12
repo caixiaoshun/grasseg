@@ -124,4 +124,6 @@ def main():
 
 
 if __name__ == "__main__":
+
+    # 使用示例 : python src/tools/split_dataset.py --root data/raw_data --output data/grass --split_ratio 0.8 --seed 42 --shuffle True
     main()

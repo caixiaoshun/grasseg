@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# 使用示例: bash scripts/train.sh logger=wandb devices="[0,1,2,3]"
 # 默认参数
 LOGGER="wandb"
 DEVICES="[0]"
