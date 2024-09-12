@@ -7,9 +7,58 @@
 
 <br>
 
+# Introduction
 
-## Q
-- 现有的数据增强可能不适用与当前数据集
-- 加载的预训练模型Imagenet不起作用，可能原因是数据预处理工作没做好
-- 模型复杂度需要与数据的复杂度匹配
+This repository contains the code for the Grass segmentation for grass coverage estimation. The code is written in Python and uses the PyTorch framework.
+
+# Installation
+
+To install the required packages, run the following command:
+
+```
+pip install -r requirements.txt
+
+pip install -e .
+```
+
+# Datastet
+
+```bash
+cloudseg
+├── src
+├── configs
+├── ...
+├── data
+│   ├── grass
+│   │   ├── train
+│   │   │   ├── img
+│   │   │   ├── ann
+│   │   ├── val
+│   │   │   ├── img
+│   │   │   ├── ann
+```
+
+# Usage
+
+To train the model, run the following command:
+
+```
+python src/train.py experiment=fcn
+```
+
+To test the model, run the following command:
+
+```
+python src/test.py
+```
+
+
+# References
+
+- [PyTorch](https://pytorch.org/)
+- [OpenCV](https://opencv.org/)
+- [NumPy](https://numpy.org/)
+- [Pandas](https://pandas.pydata.org/)
+- [Matplotlib](https://matplotlib.org/)
+
 
