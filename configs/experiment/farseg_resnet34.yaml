@@ -33,6 +33,7 @@ callbacks:
     auto_insert_metric_name: False
 
 model:
+  experiment_name: "farseg_resnet34"
   net:
     backbone: "resnet34"
   scheduler:

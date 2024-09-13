@@ -33,6 +33,7 @@ callbacks:
     auto_insert_metric_name: False
 
 model:
+  experiment_name: "fcn"
   scheduler:
     _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
     _partial_: true
