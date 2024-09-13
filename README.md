@@ -50,8 +50,6 @@ cloudseg
 |  **farseg_resnet50** | **0.5698** | **0.0771** |  **0.5918** | **0.2916** |   **0.6981**  |
 
 
-![model eval](images/model_eval.png)
-
 # Usage
 
 To train the model, run the following command:
