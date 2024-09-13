@@ -26,6 +26,7 @@ class AELitModule(LightningModule):
         scheduler: torch.optim.lr_scheduler,
         average: str = "macro",
         compile: bool = False,
+        experiment_name="experiment"
     ):
         super().__init__()
         self.save_hyperparameters(ignore=["net"])
