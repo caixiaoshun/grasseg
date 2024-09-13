@@ -38,6 +38,10 @@ cloudseg
 │   │   │   ├── ann
 ```
 
+# experiment
+
+![model eval](images/model_eval.png)
+
 # Usage
 
 To train the model, run the following command:
