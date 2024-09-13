@@ -22,12 +22,12 @@ class VisModel:
         self.device = device
         self.models = OrderedDict(
             {
-                "farseg_resnet18": Farseg(backbone="resnet18").to(self.device),
-                "farseg_resnet34": Farseg(backbone="resnet34").to(self.device),
                 "farseg_resnet50": Farseg(backbone="resnet50").to(self.device),
                 "farseg_resnet101": Farseg(backbone="resnet101").to(self.device),
-                "fcn": FCN(num_classes=6).to(self.device),
+                "farseg_resnet18": Farseg(backbone="resnet18").to(self.device),
+                "farseg_resnet34": Farseg(backbone="resnet34").to(self.device),
                 "unetmobv2": UNetMobV2(num_classes=6).to(self.device),
+                "fcn": FCN(num_classes=6).to(self.device),
             }
         )
         self.load_weights()
