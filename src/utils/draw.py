@@ -16,7 +16,7 @@ def draw_text_in_image(image: np.ndarray, text: str, position: tuple, color: tup
 
 def pasteImages(images: List[np.ndarray]):
     """
-    将两张图片粘贴在一起
+    将多张图片粘贴在一起
     """
     widths = [img.shape[1] for img in images]
     heights = [img.shape[0] for img in images]
