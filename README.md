@@ -49,6 +49,8 @@ cloudseg
 | **farseg_resnet101** |   0.5544   |   0.0612   |    0.5662   |   0.2807   |     0.6829    |
 |  **farseg_resnet50** | **0.5698** | **0.0771** |  **0.5918** | **0.2916** |   **0.6981**  |
 
+![model_eval](https://github.com/user-attachments/assets/687ce2f7-e348-4b15-bb4c-850d31992276)
+
 
 # Usage
 
