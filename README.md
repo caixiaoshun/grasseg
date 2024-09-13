@@ -38,6 +38,10 @@ cloudseg
 │   │   │   ├── ann
 ```
 
+# method
+
+[farseg](references/Foreground-Aware_Relation_Network_for_Geospatial_Object_Segmentation_in_High_Spatial_Resolution_Remote_Sensing_Imagery.pdf)
+
 # experiment
 
 |       **Name**       |   **acc**  |  **dice**  | **f1Score** |   **iou**  | **precision** |
