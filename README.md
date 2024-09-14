@@ -36,7 +36,7 @@ cloudseg
 
 ## method
 
-- [fcn (CVPR 2020)](references/Fully Convolutional Networks for Semantic Segmentation.pdf)
+- [fcn (CVPR 2015)](references/Fully-Convolutional-Networks-for-Semantic-Segmentation.pdf)
 - [farseg (CVPR 2020)](references/Foreground-Aware_Relation_Network_for_Geospatial_Object_Segmentation_in_High_Spatial_Resolution_Remote_Sensing_Imagery.pdf)
 
 
