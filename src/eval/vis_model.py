@@ -14,7 +14,6 @@ from src.utils.draw import pasteImages, give_colors_to_mask
 from src.data.components.grass import Grass
 from src.models.components.farseg import Farseg
 from src.models.components.fcn import FCN
-from src.models.components.unetmobv2 import UNetMobV2
 
 
 class VisModel:
@@ -26,7 +25,6 @@ class VisModel:
                 "farseg_resnet101": Farseg(backbone="resnet101").to(self.device),
                 "farseg_resnet18": Farseg(backbone="resnet18").to(self.device),
                 "farseg_resnet34": Farseg(backbone="resnet34").to(self.device),
-                "unetmobv2": UNetMobV2(num_classes=6).to(self.device),
                 "fcn": FCN(num_classes=6).to(self.device),
             }
         )

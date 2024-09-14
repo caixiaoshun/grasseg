@@ -28,7 +28,7 @@ do
 done
 
 # 训练的模型列表
-experiments=("farseg_resnet18" "farseg_resnet34" "farseg_resnet50" "farseg_resnet101" "fcn" "unetmobv2")
+experiments=("farseg_resnet18" "farseg_resnet34" "farseg_resnet50" "farseg_resnet101" "fcn")
 
 # 遍历每个实验配置并运行训练
 for experiment in "${experiments[@]}"
