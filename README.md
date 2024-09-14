@@ -71,7 +71,7 @@ python src/test.py
 ## References
 
 - [PyTorch](https://pytorch.org/)
-- [OpenCV](https://opencv.org/)
+- [segmentation_models_pytorch](https://github.com/qubvel-org/segmentation_models.pytorch)
 - [NumPy](https://numpy.org/)
 - [Pandas](https://pandas.pydata.org/)
 - [Matplotlib](https://matplotlib.org/)
