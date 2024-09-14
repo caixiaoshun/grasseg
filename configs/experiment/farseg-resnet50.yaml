@@ -21,7 +21,7 @@ seed: 42
 logger:
   wandb:
     project: "grasseg"
-    name: "farseg_resnet50"
+    name: "farseg-resnet50"
 
 callbacks:
   model_checkpoint:
@@ -33,7 +33,7 @@ callbacks:
     auto_insert_metric_name: False
 
 model:
-  experiment_name: "farseg_resnet50"
+  experiment_name: "farseg-resnet50"
   net:
     backbone: "resnet50"
   scheduler:
