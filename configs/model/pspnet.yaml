@@ -11,7 +11,7 @@ net:
   in_channels: 3
   num_classes: 6
   activation: null
-  upsampling: 4
+  upsampling: 8
   aux_params: null
 
 num_classes: 6
