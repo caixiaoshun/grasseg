@@ -1,17 +1,14 @@
-<div align="center">
+# Grass segmentation for grass coverage estimation
+[![demo](https://img.shields.io/badge/🤗HugginngFace-Spaces-orange)](https://huggingface.co/spaces/caixiaoshun/cloudseg)
+[![license](https://img.shields.io/badge/License-MIT-green.svg?labelColor=gray)](https://github.com/XavierJiezou/cloudseg#license)
+[![contributors](https://img.shields.io/github/contributors/XavierJiezou/cloudseg.svg)](https://github.com/XavierJiezou/cloudseg/graphs/contributors)
+[![Template](https://img.shields.io/badge/-Lightning--Hydra--Template-017F2F?style=flat&logo=github&labelColor=gray)](https://github.com/ashleve/lightning-hydra-template)
 
-# Grass segmentation for grass coverage
-
-
-</div>
-
-<br>
-
-# Introduction
+## Introduction
 
 This repository contains the code for the Grass segmentation for grass coverage estimation. The code is written in Python and uses the PyTorch framework.
 
-# Installation
+## Installation
 
 To install the required packages, run the following command:
 
@@ -21,7 +18,7 @@ pip install -r requirements.txt
 pip install -e .
 ```
 
-# Datastet
+## Datastet
 
 ```bash
 cloudseg
@@ -38,11 +35,11 @@ cloudseg
 │   │   │   ├── ann
 ```
 
-# method
+## method
 
 [farseg](references/Foreground-Aware_Relation_Network_for_Geospatial_Object_Segmentation_in_High_Spatial_Resolution_Remote_Sensing_Imagery.pdf)
 
-# experiment
+## experiment
 
 |       **Name**       |   **acc**  |  **dice**  | **f1Score** |   **iou**  | **precision** |
 |:--------------------:|:----------:|:----------:|:-----------:|:----------:|:-------------:|
@@ -56,7 +53,7 @@ cloudseg
 ![model_eval](https://github.com/user-attachments/assets/687ce2f7-e348-4b15-bb4c-850d31992276)
 
 
-# Usage
+## Usage
 
 To train the model, run the following command:
 
@@ -71,7 +68,7 @@ python src/test.py
 ```
 
 
-# References
+## References
 
 - [PyTorch](https://pytorch.org/)
 - [OpenCV](https://opencv.org/)
