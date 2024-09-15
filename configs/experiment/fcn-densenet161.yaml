@@ -13,7 +13,7 @@ defaults:
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
 
-tags: ["grasseg", "fcn-resnet34"]
+tags: ["grasseg", "fcn-densenet161"]
 
 seed: 42
 
@@ -21,7 +21,7 @@ seed: 42
 logger:
   wandb:
     project: "grasseg"
-    name: "fcn-resnet34"
+    name: "fcn-densenet161"
 
 callbacks:
   model_checkpoint:
@@ -34,8 +34,8 @@ callbacks:
 
 model:
   net:
-    encoder_name: "resnet34"
-  experiment_name: "fcn-resnet34"
+    encoder_name: "densenet161"
+  experiment_name: "fcn-densenet161"
   scheduler:
     _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
     _partial_: true
