@@ -35,6 +35,7 @@ callbacks:
 model:
   net:
     encoder_name: "timm-efficientnet-l2"
+    encoder_weights: "noisy-student-475"
   experiment_name: "fcn-timm-efficientnet-l2"
   scheduler:
     _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
