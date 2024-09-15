@@ -28,7 +28,7 @@ do
 done
 
 # 训练的模型列表
-experiments=("fcn-densenet161" "fcn-dpn131" "fcn-inceptionv4" "fcn-mit_b5" "fcn-mobileone_s4" "fcn-resnet152" "fcn-resnext101_32x48d" "fcn-se_resnext101_32x4d" "fcn-timm-efficientnet-l2" "fcn-timm-gernet_l" "fcn-timm-mobilenetv3_large_100" "fcn-timm-regnetx_320" "fcn-timm-res2net101_26w_4s" "fcn-timm-resnest101e" "fcn-timm-skresnext50_32x4d")
+experiments=("fcn-densenet161" "fcn-dpn131" "fcn-inceptionv4" "fcn-mit_b5" "fcn-mobileone_s4" "fcn-resnet152" "fcn-resnext101_32x48d" "fcn-se_resnext101_32x4d" "fcn-timm-efficientnet-l2" "fcn-timm-gernet_l" "fcn-timm-mobilenetv3_large_100" "fcn-timm-regnetx_320" "fcn-timm-res2net101_26w_4s" "fcn-timm-resnest101e")
 
 # 遍历每个实验配置并运行训练
 for experiment in "${experiments[@]}"
