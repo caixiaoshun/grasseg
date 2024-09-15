@@ -28,7 +28,7 @@ do
 done
 
 # 训练的模型列表
-experiments=("farseg-resnet18" "farseg-resnet34" "farseg-resnet50" "farseg-resnet101" "fcn-resnet18" "fcn-resnet34" "fcn-resnet50" "fcn-resnet101" "fcn-resnet152" "pspnet-resnet18" "pspnet-resnet34" "pspnet-resnet50" "pspnet-resnet101" "pspnet-resnet152")
+experiments=("fcn-densenet161" "fcn-dpn131" "fcn-inceptionv4" "fcn-mit_b5" "fcn-mobileone_s4" "fcn-resnet152" "fcn-resnext101_32x48d" "fcn-se_resnext101_32x4d" "fcn-timm-efficientnet-l2" "fcn-timm-gernet_l" "fcn-timm-mobilenetv3_large_100" "fcn-timm-regnetx_320" "fcn-timm-res2net101_26w_4s" "fcn-timm-resnest101e" "fcn-timm-skresnext50_32x4d")
 
 # 遍历每个实验配置并运行训练
 for experiment in "${experiments[@]}"
