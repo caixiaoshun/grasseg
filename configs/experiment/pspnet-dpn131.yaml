@@ -13,7 +13,7 @@ defaults:
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
 
-tags: ["grasseg", "pspnet-resnet34"]
+tags: ["grasseg", "pspnet-dpn131"]
 
 seed: 42
 
@@ -21,7 +21,7 @@ seed: 42
 logger:
   wandb:
     project: "grasseg"
-    name: "pspnet-resnet34"
+    name: "pspnet-resnet152"
 
 callbacks:
   model_checkpoint:
@@ -34,8 +34,8 @@ callbacks:
 
 model:
   net:
-    encoder_name: "resnet34"
-  experiment_name: "pspnet-resnet34"
+    encoder_name: "resnet152"
+  experiment_name: "pspnet-resnet152"
   scheduler:
     _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
     _partial_: true
