@@ -1,4 +1,4 @@
-# Grass segmentation for grass coverage estimation
+# GrassEG - Grassland Semantic Segmentation
 [![python](https://img.shields.io/badge/-Python_3.9_%7C_3.10_%7C_3.11-blue?logo=python&logoColor=white)](https://www.python.org/)
 [![pytorch](https://img.shields.io/badge/PyTorch_2.0+-ee4c2c?logo=pytorch&logoColor=white)](https://pytorch.org/get-started/locally/)
 [![demo](https://img.shields.io/badge/🤗HugginngFace-Spaces-orange)](https://huggingface.co/spaces/caixiaoshun/cloudseg)
@@ -7,22 +7,45 @@
 
 ## Introduction
 
-This repository contains the code for the Grass segmentation for grass coverage estimation. The code is written in Python and uses the PyTorch framework.
+**GrassEG** is a PyTorch-based deep learning model for semantic segmentation of grassland images. It is designed to classify grass coverage into five categories (low, medium-low, medium, medium-high, high) and can handle high-resolution satellite or aerial imagery.
+
+## Table of Contents
+
+- [Introduction](#Installation)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Dataset Preparation](#dataset-preparation)
+  - [Training](#training)
+  - [Evaluation](#evaluation)
+- [Model Architecture](#model-architecture)
+- [Results](#results)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Introduction
+
+GrassEG aims to provide a reliable deep learning framework for the segmentation of grassland imagery. This project addresses a key problem in environmental monitoring and grassland management, allowing the classification of vegetation coverage in satellite or drone images.
 
 ## Installation
 
-To install the required packages, run the following command:
-
-```
-pip install -r requirements.txt
-
-pip install -e .
-```
-
-## Datastet
+Clone the repository and install the necessary dependencies:
 
 ```bash
-cloudseg
+git clone https://github.com/caixiaoshun/grasseg.git
+cd grasseg
+pip install -r requirements.txt
+pip install -e .
+```
+Ensure you have PyTorch, torchvision, and other required libraries installed.
+
+## Usage
+
+### Dataset Preparation
+
+Organize your dataset with the following structure:
+
+```bash
+grasseg
 ├── src
 ├── configs
 ├── ...
@@ -35,6 +58,26 @@ cloudseg
 │   │   │   ├── img
 │   │   │   ├── ann
 ```
+
+### Training
+
+To train the model, run the following command:
+
+```bash
+python src/train.py experiment=farseg-resnet50
+```
+
+This script supports different configuration files for models like Swin Transformer or FCN. You can adjust hyperparameters such as learning rate, batch size, and epochs in the configuration file.
+
+### Evaluation
+
+Evaluate the trained model using:
+
+```bash
+python src/eval/vis_model.py
+```
+
+The evaluation will output segmentation metrics including Dice coefficient and Intersection over Union (IoU).
 
 ## method
 
@@ -56,21 +99,6 @@ cloudseg
 |  **farseg_resnet50** | **0.5698** | **0.0771** |  **0.5918** | **0.2916** |   **0.6981**  |
 
 ![model_eval](https://github.com/user-attachments/assets/687ce2f7-e348-4b15-bb4c-850d31992276)
-
-
-## Usage
-
-To train the model, run the following command:
-
-```
-python src/train.py experiment=fcn
-```
-
-To test the model, run the following command:
-
-```
-python src/test.py
-```
 
 
 ## References
