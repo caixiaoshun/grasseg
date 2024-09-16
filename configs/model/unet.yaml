@@ -1,0 +1,24 @@
+_target_: src.models.ae_module.AELitModule
+
+net:
+  _target_: src.models.components.unet.Unet
+  encoder_name: "resnet34"
+  encoder_depth: 5
+  encoder_weights: "imagenet"
+  decoder_use_batchnorm: true
+  decoder_channels: [256, 128, 64, 32, 16]
+  decoder_attention_type: null
+  in_channels: 3
+  num_classes: 6
+  activation: null
+  aux_params: null
+
+num_classes: 6
+
+criterion:
+  _target_: torch.nn.CrossEntropyLoss
+
+optimizer:
+  _target_: torch.optim.Adam
+  _partial_: true
+  lr: 0.001
