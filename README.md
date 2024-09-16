@@ -17,9 +17,8 @@
   - [Dataset Preparation](#dataset-preparation)
   - [Training](#training)
   - [Evaluation](#evaluation)
-- [Model Architecture](#model-architecture)
 - [Results](#results)
-- [Contributing](#contributing)
+- [References](#references)
 - [License](#license)
 
 ## Introduction
@@ -88,7 +87,7 @@ The evaluation will output segmentation metrics including Dice coefficient and I
 - [farseg (CVPR 2020)](references/Foreground-Aware_Relation_Network_for_Geospatial_Object_Segmentation_in_High_Spatial_Resolution_Remote_Sensing_Imagery.pdf)
 
 
-## experiment
+## results
 
 |       **Name**       |   **acc**  |  **dice**  | **f1Score** |   **iou**  | **precision** |
 |:--------------------:|:----------:|:----------:|:-----------:|:----------:|:-------------:|
@@ -108,5 +107,9 @@ The evaluation will output segmentation metrics including Dice coefficient and I
 - [NumPy](https://numpy.org/)
 - [Pandas](https://pandas.pydata.org/)
 - [Matplotlib](https://matplotlib.org/)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 
