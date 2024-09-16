@@ -17,6 +17,7 @@
   - [Dataset Preparation](#dataset-preparation)
   - [Training](#training)
   - [Evaluation](#evaluation)
+- [Methods](#methods)
 - [Results](#results)
 - [References](#references)
 - [License](#license)
@@ -78,7 +79,7 @@ python src/eval/vis_model.py
 
 The evaluation will output segmentation metrics including Dice coefficient and Intersection over Union (IoU).
 
-## method
+## Method
 
 - [fcn (CVPR 2015)](references/Fully-Convolutional-Networks-for-Semantic-Segmentation.pdf)
 - [unet (MICCAI 2015)](references/U-Net-Convolutional-Networks-for-Biomedical-Image-Segmentation.pdf)
@@ -87,7 +88,7 @@ The evaluation will output segmentation metrics including Dice coefficient and I
 - [farseg (CVPR 2020)](references/Foreground-Aware_Relation_Network_for_Geospatial_Object_Segmentation_in_High_Spatial_Resolution_Remote_Sensing_Imagery.pdf)
 
 
-## results
+## Results
 
 |       **Name**       |   **acc**  |  **dice**  | **f1Score** |   **iou**  | **precision** |
 |:--------------------:|:----------:|:----------:|:-----------:|:----------:|:-------------:|
@@ -110,6 +111,5 @@ The evaluation will output segmentation metrics including Dice coefficient and I
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
+This project is licensed under the MIT License.
 
