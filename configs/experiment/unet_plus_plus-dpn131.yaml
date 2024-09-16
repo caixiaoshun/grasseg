@@ -1,0 +1,44 @@
+# @package _global_
+
+# to execute this experiment run:
+# python train.py experiment=example
+
+defaults:
+  - override /trainer: gpu
+  - override /data: grass
+  - override /model: unet_plus_plus
+  - override /logger: tensorboard
+  - override /callbacks: default
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+
+tags: ["grasseg", "unet_plus_plus-dpn131"]
+
+seed: 42
+
+
+logger:
+  wandb:
+    project: "grasseg"
+    name: "unet_plus_plus-resnet152"
+
+callbacks:
+  model_checkpoint:
+    dirpath: ${paths.output_dir}/checkpoints
+    filename: "epoch_{epoch:03d}"
+    monitor: "val/loss"
+    mode: "min"
+    save_last: True
+    auto_insert_metric_name: False
+
+model:
+  net:
+    encoder_name: "resnet152"
+  experiment_name: "unet_plus_plus-resnet152"
+  scheduler:
+    _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
+    _partial_: true
+    mode: min
+    factor: 0.5
+    patience: 5
