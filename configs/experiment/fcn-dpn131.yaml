@@ -21,7 +21,7 @@ seed: 42
 logger:
   wandb:
     project: "grasseg"
-    name: "fcn-resnet152"
+    name: "fcn-dpn131"
 
 callbacks:
   model_checkpoint:
@@ -34,8 +34,8 @@ callbacks:
 
 model:
   net:
-    encoder_name: "resnet152"
-  experiment_name: "fcn-resnet152"
+    encoder_name: "dpn131"
+  experiment_name: "fcn-dpn131"
   scheduler:
     _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
     _partial_: true
