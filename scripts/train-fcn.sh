@@ -4,7 +4,7 @@
 # 默认参数
 LOGGER="wandb"
 DEVICES="[0]"
-MAX_EPOCHS=100
+MAX_EPOCHS=150
 
 # 解析命令行传递的参数
 for arg in "$@"
