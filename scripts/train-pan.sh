@@ -28,7 +28,7 @@ do
 done
 
 # 训练的模型列表
-experiments=("pan-densenet161" "pan-dpn131" "pan-inceptionv4" "pan-mit_b5" "pan-mobileone_s4" "pan-resnet50" "pan-resnet101" "pan-resnet152" "pan-resnext101_32x48d" "pan-se_resnext101_32x4d" "pan-timm-efficientnet-l2" "pan-timm-gernet_l" "pan-timm-mobilenetv3_large_100" "pan-timm-regnetx_320" "pan-timm-res2net101_26w_4s" "pan-timm-resnest101e")
+experiments=("pan-dpn131" "pan-inceptionv4" "pan-mit_b5" "pan-mobileone_s4" "pan-resnet50" "pan-resnet101" "pan-resnet152" "pan-resnext101_32x48d" "pan-se_resnext101_32x4d" "pan-timm-efficientnet-l2" "pan-timm-gernet_l" "pan-timm-mobilenetv3_large_100" "pan-timm-regnetx_320" "pan-timm-res2net101_26w_4s" "pan-timm-resnest101e")
 
 # 遍历每个实验配置并运行训练
 for experiment in "${experiments[@]}"
