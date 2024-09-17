@@ -1,7 +1,7 @@
 _target_: src.models.ae_module.AELitModule
 
 net:
-  _target_: src.models.components.fcn.FCN
+  _target_: src.models.components.fpn.FPN
   encoder_name: "resnet34"
   encoder_depth: 5
   encoder_weights: "imagenet"

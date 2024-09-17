@@ -6,14 +6,14 @@
 defaults:
   - override /trainer: gpu
   - override /data: grass
-  - override /model: fcn
+  - override /model: fpn
   - override /logger: tensorboard
   - override /callbacks: default
 
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
 
-tags: ["grasseg", "fcn-timm-mobilenetv3_large_100"]
+tags: ["grasseg", "fpn-timm-regnetx_320"]
 
 seed: 42
 
@@ -21,7 +21,7 @@ seed: 42
 logger:
   wandb:
     project: "grasseg"
-    name: "fcn-timm-mobilenetv3_large_100"
+    name: "fpn-timm-regnetx_320"
 
 callbacks:
   model_checkpoint:
@@ -34,8 +34,8 @@ callbacks:
 
 model:
   net:
-    encoder_name: "timm-mobilenetv3_large_100"
-  experiment_name: "fcn-timm-mobilenetv3_large_100"
+    encoder_name: "timm-regnetx_320"
+  experiment_name: "fpn-timm-regnetx_320"
   scheduler:
     _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
     _partial_: true

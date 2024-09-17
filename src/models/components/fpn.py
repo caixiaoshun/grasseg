@@ -4,7 +4,7 @@ from torch import nn as nn
 import segmentation_models_pytorch as smp
 
 
-class FCN(nn.Module):
+class FPN(nn.Module):
     def __init__(
         self,
         encoder_name: str = "resnet34",
