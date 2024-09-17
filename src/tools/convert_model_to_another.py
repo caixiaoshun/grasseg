@@ -42,5 +42,5 @@ def main():
 
 
 if __name__ == '__main__':
-    #example python tools/convert_model_to_another.py --model1 pspnet --model2 unet
+    #example python src/tools/convert_model_to_another.py --model1 pspnet --model2 unet
     main()
