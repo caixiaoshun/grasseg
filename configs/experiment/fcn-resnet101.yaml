@@ -34,7 +34,7 @@ callbacks:
 
 model:
   net:
-    encoder_name: "densenet161"
+    weights: "resnet50"
   experiment_name: "fcn-resnet101"
   scheduler:
     _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
