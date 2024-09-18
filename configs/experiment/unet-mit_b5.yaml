@@ -13,7 +13,7 @@ defaults:
 # all parameters below will be merged with parameters from default configurations set above
 # this allows you to overwrite only specified parameters
 
-tags: ["grasseg", "unet-mit_b5"]
+tags: ["grasseg", "unet_plus_plus-mit_b5"]
 
 seed: 42
 
@@ -21,7 +21,7 @@ seed: 42
 logger:
   wandb:
     project: "grasseg"
-    name: "unet-mit_b5"
+    name: "unet_plus_plus-mit_b5"
 
 callbacks:
   model_checkpoint:
@@ -35,7 +35,7 @@ callbacks:
 model:
   net:
     encoder_name: "mit_b5"
-  experiment_name: "unet-mit_b5"
+  experiment_name: "unet_plus_plus-mit_b5"
   scheduler:
     _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
     _partial_: true
