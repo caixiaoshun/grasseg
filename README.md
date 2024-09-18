@@ -89,6 +89,7 @@ The evaluation will output segmentation metrics including Dice coefficient and I
 - [deeplabv3 (arxiv 2017)](references/Rethinking-Atrous-Convolution-for-Semantic-Image-Segmentation.pdf)
 - [deeplabv3+ (ECCV 2018)](references/Encoder-Decoder-with-Atrous-Separable-Convolution-for-Semantic-Image-Segmentation.pdf)
 - [unet plus plus (MICCAI 2018)](references/UNet++-A-Nested-U-Net-Architecture-for-Medical-Image-Segmentation.pdf)
+- [pan (arxiv 2018)](references/Pyramid_attention_network_for_semantic_segmentation.pdf)
 - [farseg (CVPR 2020)](references/Foreground-Aware_Relation_Network_for_Geospatial_Object_Segmentation_in_High_Spatial_Resolution_Remote_Sensing_Imagery.pdf)
 - [manet (IEEE Access (2020))](references/MA-Net_A_Multi-Scale_Attention_Network_for_Liver_and_Tumor_Segmentation.pdf)
 
