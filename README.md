@@ -85,6 +85,7 @@ The evaluation will output segmentation metrics including Dice coefficient and I
 - [unet (MICCAI 2015)](references/U-Net-Convolutional-Networks-for-Biomedical-Image-Segmentation.pdf)
 - [pspnet (CVPR(2017)](references/Pyramid-Scene-Parsing-Network.pdf)
 - [fpn (CVPR(2017)](references/A-Unified-Architecture-for-Instance-and-Semantic-Segmentation.pdf)
+- [linknet (VCIP 2017)](references/LinkNet-Exploiting-Encoder-Representations-for-Efficient-Semantic-Segmentation.pdf)
 - [deeplabv3 (arxiv 2017)](references/Rethinking-Atrous-Convolution-for-Semantic-Image-Segmentation.pdf)
 - [deeplabv3+ (ECCV 2018)](references/Encoder-Decoder-with-Atrous-Separable-Convolution-for-Semantic-Image-Segmentation.pdf)
 - [unet plus plus (MICCAI 2018)](references/UNet++-A-Nested-U-Net-Architecture-for-Medical-Image-Segmentation.pdf)
