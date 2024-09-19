@@ -109,6 +109,14 @@ The evaluation will output segmentation metrics including Dice coefficient and I
 | **fpn**           | timm-regnetx_320     | 0.5663     | 0.0743     | 0.5849       | 0.2847     | 0.6267         | 0.5937                |
 | **linknet**       | timm-resnest101e     | **0.5734** | 0.0747     | **0.5924**   | **0.2919** | 0.6330         | **0.5849**            |
 
+- 荒地 ![#FFFFFF](https://placehold.co/15x15/FFFFFF/FFFFFF)
+- 低覆盖度 ![#ADFF2F](https://placehold.co/15x15/ADFF2F/ADFF2F)
+- 中低覆盖度 ![#90EE90](https://placehold.co/15x15/90EE90/90EE90)
+- 中覆盖度 ![#3CB371](https://placehold.co/15x15/3CB371/3CB371)
+- 中高覆盖度 ![#228B22](https://placehold.co/15x15/228B22/228B22)
+- 高覆盖度 ![#006400](https://placehold.co/15x15/006400/006400)
+
+
 ![model_eval](images/model_eval.png)
 
 
