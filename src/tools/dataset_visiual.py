@@ -19,7 +19,7 @@ def get_args()->Tuple[str,str]:
     root = args.root
     phase = args.phase
     assert os.path.exists(root), f"root directory {root} does not exist"
-    assert phase in ["train","val","test"], f"phase {phase} is not valid"
+    assert phase in ["train","val"], f"phase {phase} is not valid"
     return root, phase
 
 def main():
