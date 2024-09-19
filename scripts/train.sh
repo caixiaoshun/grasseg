@@ -28,7 +28,7 @@ do
 done
 
 # 训练的模型列表
-experiments=("fcn-resnet101" "unet-timm-efficientnet-l2	" "pspnet-timm-efficientnet-l2" "fpn-timm-regnetx_320" "linknet-timm-resnest101e" "deeplabv3-resnet152" "deeplabv3plus-timm-efficientnet-l2" "unet_plus_plus-se_resnext101_32x4d" "pan-se_resnext101_32x4d" "manet-se_resnext101_32x4d")
+experiments=("fcn-resnet101" "unet-timm-efficientnet-l2	" "pspnet-timm-efficientnet-l2" "fpn-timm-regnetx_320" "linknet-timm-resnest101e" "deeplabv3-resnet152" "deeplabv3plus-timm-efficientnet-l2" "unet_plus_plus-se_resnext101_32x4d" "pan-se_resnext101_32x4d" "manet-se_resnext101_32x4d" "farseg-resnet50")
 
 # 遍历每个实验配置并运行训练
 for experiment in "${experiments[@]}"
