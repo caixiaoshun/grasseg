@@ -28,7 +28,7 @@ do
 done
 
 # 训练的模型列表
-experiments=("unet_plus_plus-densenet161" "unet_plus_plus-dpn131" "unet_plus_plus-inceptionv4" "unet_plus_plus-mit_b5" "unet_plus_plus-mobileone_s4" "unet_plus_plus-resnet50" "unet_plus_plus-resnet101" "unet_plus_plus-resnet152" "unet_plus_plus-resnext101_32x48d" "unet_plus_plus-se_resnext101_32x4d" "unet_plus_plus-timm-efficientnet-l2" "unet_plus_plus-timm-gernet_l" "unet_plus_plus-timm-mobilenetv3_large_100" "unet_plus_plus-timm-regnetx_320" "unet_plus_plus-timm-res2net101_26w_4s" "unet_plus_plus-timm-resnest101e")
+experiments=("unet_plus_plus-densenet161" "unet_plus_plus-dpn131" "unet_plus_plus-inceptionv4" "unet_plus_plus-mobileone_s4" "unet_plus_plus-resnet50" "unet_plus_plus-resnet101" "unet_plus_plus-resnet152" "unet_plus_plus-resnext101_32x48d" "unet_plus_plus-se_resnext101_32x4d" "unet_plus_plus-timm-efficientnet-l2" "unet_plus_plus-timm-gernet_l" "unet_plus_plus-timm-mobilenetv3_large_100" "unet_plus_plus-timm-regnetx_320" "unet_plus_plus-timm-res2net101_26w_4s" "unet_plus_plus-timm-resnest101e")
 
 # 遍历每个实验配置并运行训练
 for experiment in "${experiments[@]}"

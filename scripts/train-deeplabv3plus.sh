@@ -28,7 +28,7 @@ do
 done
 
 # 训练的模型列表
-experiments=("deeplabv3plus-dpn131" "deeplabv3plus-mit_b5" "deeplabv3plus-mobileone_s4" "deeplabv3plus-resnet50" "deeplabv3plus-resnet101" "deeplabv3plus-resnet152" "deeplabv3plus-resnext101_32x48d" "deeplabv3plus-se_resnext101_32x4d" "deeplabv3plus-timm-efficientnet-l2" "deeplabv3plus-timm-gernet_l" "deeplabv3plus-timm-mobilenetv3_large_100" "deeplabv3plus-timm-regnetx_320" "deeplabv3plus-timm-res2net101_26w_4s" "deeplabv3plus-timm-resnest101e")
+experiments=("deeplabv3plus-dpn131" "deeplabv3plus-mobileone_s4" "deeplabv3plus-resnet50" "deeplabv3plus-resnet101" "deeplabv3plus-resnet152" "deeplabv3plus-resnext101_32x48d" "deeplabv3plus-se_resnext101_32x4d" "deeplabv3plus-timm-efficientnet-l2" "deeplabv3plus-timm-gernet_l" "deeplabv3plus-timm-mobilenetv3_large_100")
 
 # 遍历每个实验配置并运行训练
 for experiment in "${experiments[@]}"

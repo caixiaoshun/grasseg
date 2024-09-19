@@ -28,7 +28,7 @@ do
 done
 
 # 训练的模型列表
-experiments=("linknet-densenet161" "linknet-dpn131" "linknet-inceptionv4" "linknet-mit_b5" "linknet-mobileone_s4" "linknet-resnet50" "linknet-resnet101" "linknet-resnet152" "linknet-resnext101_32x48d" "linknet-se_resnext101_32x4d" "linknet-timm-efficientnet-l2" "linknet-timm-gernet_l" "linknet-timm-mobilenetv3_large_100" "linknet-timm-regnetx_320" "linknet-timm-res2net101_26w_4s" "linknet-timm-resnest101e")
+experiments=("linknet-densenet161" "linknet-dpn131" "linknet-inceptionv4" "linknet-mobileone_s4" "linknet-resnet50" "linknet-resnet101" "linknet-resnet152" "linknet-resnext101_32x48d" "linknet-se_resnext101_32x4d" "linknet-timm-efficientnet-l2" "linknet-timm-gernet_l" "linknet-timm-mobilenetv3_large_100" "linknet-timm-regnetx_320" "linknet-timm-res2net101_26w_4s" "linknet-timm-resnest101e")
 
 # 遍历每个实验配置并运行训练
 for experiment in "${experiments[@]}"
