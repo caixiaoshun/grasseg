@@ -14,6 +14,15 @@ from src.utils.draw import pasteImages, give_colors_to_mask
 from src.data.components.grass import Grass
 from src.models.components.farseg import Farseg
 from src.models.components.fcn import FCN
+from src.models.components.linknet import Linknet
+from src.models.components.pspnet import PSPNet
+from src.models.components.unet_plus_plus import UnetPlusPlus
+from src.models.components.pan import PAN
+from src.models.components.unet import Unet
+from src.models.components.deeplabv3plus import DeepLabV3Plus
+from src.models.components.manet import MAnet
+from src.models.components.fpn import FPN
+from src.models.components.deeplabv3 import DeepLabV3
 
 
 class VisModel:
@@ -21,11 +30,35 @@ class VisModel:
         self.device = device
         self.models = OrderedDict(
             {
+                "linknet-timm-resnest101e": Linknet(encoder_name="timm-resnest101e").to(
+                    self.device
+                ),
+                "fpn-timm-regnetx_320": FPN(encoder_name="timm-regnetx_320").to(
+                    self.device
+                ),
+                "manet-se_resnext101_32x4d": MAnet(
+                    encoder_name="se_resnext101_32x4d"
+                ).to(self.device),
+                "deeplabv3plus-timm-efficientnet-l2": DeepLabV3Plus(
+                    encoder_name="timm-efficientnet-l2",encoder_weights="noisy-student-475"
+                ).to(self.device),
                 "farseg_resnet50": Farseg(backbone="resnet50").to(self.device),
-                "farseg_resnet101": Farseg(backbone="resnet101").to(self.device),
-                "farseg_resnet18": Farseg(backbone="resnet18").to(self.device),
-                "farseg_resnet34": Farseg(backbone="resnet34").to(self.device),
-                "fcn": FCN(num_classes=6).to(self.device),
+                "unet-timm-efficientnet-l2": Unet(
+                    encoder_name="timm-efficientnet-l2",encoder_weights="noisy-student-475"
+                ).to(self.device),
+                "pan-se_resnext101_32x4d": PAN(encoder_name="se_resnext101_32x4d").to(
+                    self.device
+                ),
+                "unet_plus_plus-se_resnext101_32x4d": UnetPlusPlus(
+                    encoder_name="se_resnext101_32x4d"
+                ).to(self.device),
+                "fcn-resnet50": FCN(weights="resnet50",num_classes=6).to(self.device),
+                "pspnet-timm-efficientnet-l2": PSPNet(
+                    encoder_name="timm-efficientnet-l2",encoder_weights="noisy-student-475"
+                ).to(self.device),
+                "deeplabv3-resnet152": DeepLabV3(encoder_name="resnet152").to(
+                    self.device
+                ),
             }
         )
         self.load_weights()
@@ -35,7 +68,7 @@ class VisModel:
         ckpt = torch.load(filename, map_location=self.device)
         state_dict = {}
         for k, v in ckpt["state_dict"].items():
-            state_dict[k.replace("net.", "")] = v
+            state_dict[k[4:]] = v
         return state_dict
 
     def load_weights(self):
@@ -154,6 +187,7 @@ def parse_args() -> str:
 
 
 if __name__ == "__main__":
+    # example usage: python src/eval/vis_model.py --device cuda:0
     device = parse_args()
     vis = VisModel(device=device)
     vis.vis()
