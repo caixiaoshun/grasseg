@@ -127,6 +127,7 @@ class VisModel:
         font = ImageFont.truetype("resource/Times New Roman.ttf", size=30)
 
         titles = ["input", "label"] + list(self.models.keys())
+        titles = [title.split("-")[0] for title in titles]
         num_cols = len(titles)
         col_width = width // num_cols
 
