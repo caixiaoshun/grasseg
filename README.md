@@ -109,7 +109,7 @@ The evaluation will output segmentation metrics including Dice coefficient and I
 | **fpn**           | timm-regnetx_320     | 0.5663     | 0.0743     | 0.5849       | 0.2847     | 0.6267         | 0.5937                |
 | **linknet**       | timm-resnest101e     | **0.5734** | 0.0747     | **0.5924**   | **0.2919** | 0.6330         | **0.5849**            |
 
-![model_eval](https://github.com/user-attachments/assets/687ce2f7-e348-4b15-bb4c-850d31992276)
+![model_eval](images/model_eval.png)
 
 
 ## References
