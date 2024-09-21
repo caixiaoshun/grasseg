@@ -17,8 +17,10 @@ def crop_image(image_path, output_path, patch_size:int=256):
     os.makedirs(output_path, exist_ok=True)
     image = Image.open(image_path)
     width, height = image.size
-    n_rows = height // patch_size
-    n_cols = width // patch_size
+    n_rows = width // patch_size
+    n_cols = height // patch_size
+
+    print(f"Image size: {width}x{height}, Patches: {n_rows}x{n_cols}")
 
     for i in track(range(n_rows),total=n_rows):
         for j in range(n_cols):
