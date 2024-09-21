@@ -22,14 +22,14 @@ def get_args() -> Tuple[str, str,str]:
     parser.add_argument(
         "--filename",
         type=str,
-        default="res",
+        default="res.pdf",
         help="Filename of the image to be inverted and cropped",
     )
     args = parser.parse_args()
     return args.input_folder, args.output_folder, args.filename
 
 
-def invert_crop_images(input_folder, output_folder,output_filename):
+def invert_crop_images(input_folder:str, output_folder:str,output_filename:str,patch_size=256)->Image.Image:
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
     filenames = natsorted(glob(os.path.join(input_folder, "*.png")))
@@ -43,19 +43,19 @@ def invert_crop_images(input_folder, output_folder,output_filename):
     ]
     max_row = max(rows)
     max_col = max(cols)
-    res_img = Image.new("RGB", (max_row * 256, max_col * 256))
+    res_img = Image.new("RGB", (max_row * patch_size, max_col * patch_size))
     for filename in track(filenames, total=len(filenames)):
         img = Image.open(filename)
         row = int(filename.split(os.path.sep)[-1].split(".")[0].split("_")[1])
         col = int(filename.split(os.path.sep)[-1].split(".")[0].split("_")[2])
-        res_img.paste(img, (row * 256, col * 256))
-    res_img.save(os.path.join(output_folder, f"{output_filename}.png"), dpi=(300, 300))
+        res_img.paste(img, (row * patch_size, col * patch_size))
+    return res_img
 
 
 def main():
     input_folder, output_folder,filename = get_args()
-    invert_crop_images(input_folder, output_folder,filename)
-
+    img = invert_crop_images(input_folder, output_folder,filename)
+    img.save(os.path.join(output_folder, filename))
 
 if __name__ == "__main__":
     main()
