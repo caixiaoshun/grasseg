@@ -3,6 +3,7 @@ from PIL import Image,ImageDraw, ImageFont
 from typing import List
 import torch
 import torchvision
+from src.data.components.grass import Grass
 
 def draw_text_in_image(image: np.ndarray, text: str, position: tuple, color: tuple):
     """
@@ -48,14 +49,7 @@ def give_colors_to_mask(image: np.ndarray, mask: np.ndarray, num_classes=6)->np.
     masks = [mask == v for v in range(num_classes)]
     mask = np.stack(masks, axis=0).astype("bool")
     mask_tensor = torch.tensor(mask)
-    colors = [
-        (255, 255, 255),  # 白色    荒地
-        (173, 255, 47),  # 浅绿    低覆盖度
-        (144, 238, 144),  # 中绿   中低覆盖度
-        (60, 179, 113),  # 深绿绿     中覆盖度
-        (34, 139, 34),
-        (0, 100, 0),
-    ]
+    colors = list(Grass.METAINFO["palette"])
 
     mask_colors = (
         torchvision.utils.draw_segmentation_masks(
