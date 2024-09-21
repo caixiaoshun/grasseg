@@ -29,9 +29,7 @@ def get_args() -> Tuple[str, str,str]:
     return args.input_folder, args.output_folder, args.filename
 
 
-def invert_crop_images(input_folder:str, output_folder:str,output_filename:str,patch_size=256)->Image.Image:
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
+def invert_crop_images(input_folder:str,patch_size=256)->Image.Image:
     filenames = natsorted(glob(os.path.join(input_folder, "*.png")))
     rows = [
         int(filename.split(os.path.sep)[-1].split(".")[0].split("_")[1])
@@ -54,6 +52,8 @@ def invert_crop_images(input_folder:str, output_folder:str,output_filename:str,p
 
 def main():
     input_folder, output_folder,filename = get_args()
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
     img = invert_crop_images(input_folder, output_folder,filename)
     img.save(os.path.join(output_folder, filename))
 
