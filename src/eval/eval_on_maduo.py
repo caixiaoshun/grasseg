@@ -51,12 +51,13 @@ def read_image(filename: str) -> Tuple[np.ndarray, torch.Tensor]:
 @torch.no_grad()
 def inference(model: nn.Module, img: torch.Tensor) -> np.ndarray:
     logits = model(img)
-    preds = torch.argmax(logits, dim=1).squeeze().cpu().numpy()
+    preds = torch.argmax(logits, dim=1).squeeze().cpu().numpy().astype("uint8")
     return preds
 
 
 def main(input_dir:str,device: str,output_dir: str,mask_path:str):
     os.makedirs(output_dir, exist_ok=True)
+    os.makedirs(mask_path, exist_ok=True)
     model = load_module(device)
     filenames = load_data(input_dir)
     for filename in track(filenames, total=len(filenames)):
@@ -80,8 +81,8 @@ def get_args()->Tuple[str,str]:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input_dir", type=str,required=True,help="input directory")
     parser.add_argument("--device", type=str, default="cpu",help="device to use")
-    parser.add_argument("--output_dir", type=str, default="data/output",help="output directory")
-    parser.add_argument("--mask_path", type=str, help="mask path")
+    parser.add_argument("--output_dir", type=str, default="data/output",help="output directory",required=True)
+    parser.add_argument("--mask_path", type=str, help="mask path",required=True)
     args = parser.parse_args()
     return args.input_dir,args.device, args.output_dir,args.mask_path
 
