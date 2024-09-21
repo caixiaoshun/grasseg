@@ -55,8 +55,8 @@ def inference(model: nn.Module, img: torch.Tensor) -> np.ndarray:
     return preds
 
 
-def main(input_dir:str,device: str,output_dir: str,mask_path:str):
-    os.makedirs(output_dir, exist_ok=True)
+def main(input_dir:str,device: str,color_mask_dir: str,mask_path:str):
+    os.makedirs(color_mask_dir, exist_ok=True)
     os.makedirs(mask_path, exist_ok=True)
     model = load_module(device)
     filenames = load_data(input_dir)
@@ -72,7 +72,7 @@ def main(input_dir:str,device: str,output_dir: str,mask_path:str):
             color_mask = give_colors_to_mask(image,mask)
         
         base_name = os.path.basename(filename)
-        output_path = os.path.join(output_dir, base_name)
+        output_path = os.path.join(color_mask_dir, base_name)
         Image.fromarray(color_mask).save(output_path)
         Image.fromarray(mask).save(os.path.join(mask_path, base_name))
     print("Done")
@@ -81,11 +81,11 @@ def get_args()->Tuple[str,str]:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input_dir", type=str,required=True,help="input directory")
     parser.add_argument("--device", type=str, default="cpu",help="device to use")
-    parser.add_argument("--output_dir", type=str, default="data/output",help="output directory",required=True)
+    parser.add_argument("--color_mask_dir", type=str, default="data/output",help="output directory",required=True)
     parser.add_argument("--mask_path", type=str, help="mask path",required=True)
     args = parser.parse_args()
-    return args.input_dir,args.device, args.output_dir,args.mask_path
+    return args.input_dir,args.device, args.color_mask_dir,args.mask_path
 
 if __name__ == "__main__":
-    input_dir,device, output_dir,mask_path = get_args()
-    main(input_dir,device,output_dir,mask_path)
+    input_dir,device, color_mask_dir,mask_path = get_args()
+    main(input_dir,device,color_mask_dir,mask_path)
