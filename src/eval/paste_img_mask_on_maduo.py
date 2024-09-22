@@ -71,11 +71,13 @@ def statistic_pixel(mask: Image.Image, classes=len(Grass.METAINFO["palette"])):
     total = sum(list(statistic.values()))
 
     vegetation_coverage = 0
-    ratio = [0,0.05,0.15,0.3,0.6,0.9]
+    ratio = [0, 0.05, 0.15, 0.3, 0.6, 0.9]
 
     for i in range(classes):
         statistic[i] = statistic[i] / total
         statistic[i] = statistic[i] * 25253
+        statistic[i] = round(statistic[i], 2)
+        statistic[i] = f"{statistic[i]}平方公里"
     return statistic
 
 
@@ -99,8 +101,8 @@ def main():
     res.save(os.path.join(output_folder, filename))
 
     statistic = statistic_pixel(mask)
-    with open(statistic_path, "w") as f:
-        f.write(json.dumps(statistic, indent=4))
+    with open(statistic_path, "w", encoding="utf-8") as f:
+        f.write(json.dumps(statistic, indent=4, ensure_ascii=False))
 
 
 if __name__ == "__main__":
