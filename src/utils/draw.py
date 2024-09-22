@@ -34,7 +34,7 @@ def pasteImages(images: List[np.ndarray]):
     return paste_img
 
 
-def give_colors_to_mask(image: np.ndarray, mask: np.ndarray, num_classes=6)->np.ndarray:
+def give_colors_to_mask(image: np.ndarray, mask: np.ndarray, num_classes=6,colors = list(Grass.METAINFO["palette"]))->np.ndarray:
     """将mask转换为彩色
 
     Args:
@@ -49,7 +49,6 @@ def give_colors_to_mask(image: np.ndarray, mask: np.ndarray, num_classes=6)->np.
     masks = [mask == v for v in range(num_classes)]
     mask = np.stack(masks, axis=0).astype("bool")
     mask_tensor = torch.tensor(mask)
-    colors = list(Grass.METAINFO["palette"])
 
     mask_colors = (
         torchvision.utils.draw_segmentation_masks(
