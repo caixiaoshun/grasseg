@@ -20,7 +20,7 @@ def get_args() -> Tuple[str, str, str, str]:
         help="Path to the input folder containing the images",
     )
     parser.add_argument(
-        "--mask_folder",
+        "--color_mask_folder",
         type=str,
         default="data/mask",
         help="Path to the input folder containing the masks",
@@ -38,13 +38,13 @@ def get_args() -> Tuple[str, str, str, str]:
         help="Filename of the image to be inverted and cropped",
     )
     args = parser.parse_args()
-    return args.image_folder, args.mask_folder, args.output_folder, args.filename
+    return args.image_folder, args.color_mask_folder, args.output_folder, args.filename
 
 
 def main():
-    image_folder, mask_folder, output_folder, filename = get_args()
+    image_folder, color_mask_folder, output_folder, filename = get_args()
     image = invert_crop_images(image_folder,work_name="invert images")
-    mask = invert_crop_images(mask_folder,work_name="invert masks")
+    mask = invert_crop_images(color_mask_folder,work_name="invert masks")
     assert image.size == mask.size, "image and mask size not match"
     res = Image.new("RGB", (image.size[0] * 2, image.size[1]))
     res.paste(image, (0, 0))
