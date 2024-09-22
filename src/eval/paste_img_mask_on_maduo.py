@@ -43,8 +43,8 @@ def get_args() -> Tuple[str, str, str, str]:
 
 def main():
     image_folder, mask_folder, output_folder, filename = get_args()
-    image = invert_crop_images(image_folder)
-    mask = invert_crop_images(mask_folder)
+    image = invert_crop_images(image_folder,work_name="invert images")
+    mask = invert_crop_images(mask_folder,work_name="invert masks")
     assert image.size == mask.size, "image and mask size not match"
     res = Image.new("RGB", (image.size[0] * 2, image.size[1]))
     res.paste(image, (0, 0))

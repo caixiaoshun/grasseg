@@ -29,7 +29,7 @@ def get_args() -> Tuple[str, str,str]:
     return args.input_folder, args.output_folder, args.filename
 
 
-def invert_crop_images(input_folder:str,patch_size=256)->Image.Image:
+def invert_crop_images(input_folder:str,patch_size=256,work_name="Working")->Image.Image:
     filenames = natsorted(glob(os.path.join(input_folder, "*.png")))
     rows = [
         int(filename.split(os.path.sep)[-1].split(".")[0].split("_")[1])
@@ -42,7 +42,7 @@ def invert_crop_images(input_folder:str,patch_size=256)->Image.Image:
     max_row = max(rows)
     max_col = max(cols)
     res_img = Image.new("RGB", (max_row * patch_size, max_col * patch_size))
-    for filename in track(filenames, total=len(filenames)):
+    for filename in track(filenames, total=len(filenames),description=work_name):
         img = Image.open(filename)
         row = int(filename.split(os.path.sep)[-1].split(".")[0].split("_")[1])
         col = int(filename.split(os.path.sep)[-1].split(".")[0].split("_")[2])
