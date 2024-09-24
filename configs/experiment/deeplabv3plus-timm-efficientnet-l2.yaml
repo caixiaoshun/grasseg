@@ -43,3 +43,5 @@ model:
     mode: min
     factor: 0.5
     patience: 5
+data:
+  batch_size: 4
