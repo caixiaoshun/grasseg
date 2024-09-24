@@ -37,4 +37,4 @@ do
   python src/train.py experiment=$experiment trainer.devices=$DEVICES logger=$LOGGER trainer.max_epochs=$MAX_EPOCHS
 done
 
-python src/train.py experiment=deeplabv3plus-timm-efficientnet-l2 trainer.devices=$DEVICES logger=$LOGGER trainer.max_epochs=$MAX_EPOCHS
+python src/train.py experiment=deeplabv3plus-timm-efficientnet-l2 trainer.devices=$DEVICES logger=$LOGGER trainer.max_epochs=$MAX_EPOCHS data.batch_siz4
