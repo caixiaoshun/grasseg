@@ -4,7 +4,7 @@ net:
   _target_: src.models.components.lcnet.LCNet
   num_classes: 6
   block_1: 3
-  block_2: 7
+  block_2: 11
   C: 32
   P: 0.5
 
