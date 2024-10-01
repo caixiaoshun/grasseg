@@ -92,6 +92,7 @@ The evaluation will output segmentation metrics including Dice coefficient and I
 - [pan (arxiv 2018)](references/Pyramid_attention_network_for_semantic_segmentation.pdf)
 - [farseg (CVPR 2020)](references/Foreground-Aware_Relation_Network_for_Geospatial_Object_Segmentation_in_High_Spatial_Resolution_Remote_Sensing_Imagery.pdf)
 - [manet (IEEE Access (2020))](references/MA-Net_A_Multi-Scale_Attention_Network_for_Liver_and_Tumor_Segmentation.pdf)
+- [lcnet (IEEE Transactions on Intelligent Transportation Systems (2024))](references/Lightweight_Context-Aware_Network_Using_Partial-Channel_Transformation_for_Real-Time_Semantic_Segmentation.pdf)
 
 ## Results
 
