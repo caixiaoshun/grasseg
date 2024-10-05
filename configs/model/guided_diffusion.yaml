@@ -1,0 +1,51 @@
+_target_: src.models.diffusion_module.DiffusionLitModule
+
+net:
+  _target_: src.guided_diffusion.unet.UNetModel
+  image_size: 256
+  in_channels: 3
+  model_channels: 256
+  out_channels: 6
+  num_res_blocks: 2
+  attention_resolutions: [32,16,8]
+  dropout: 0.0
+  channel_mult: [1, 1, 2, 2, 4, 4]
+  num_classes: 6
+  num_heads: 1
+  num_head_channels: 64
+  num_heads_upsample: -1
+  use_scale_shift_norm: true
+  resblock_updown: true
+  use_new_attention_order: true
+
+# diffusion 配置
+steps: 1000
+learn_sigma: true
+sigma_small: false
+noise_schedule: "cosine"
+b_map_scheduler_type: "cosine"
+use_kl: false
+predict_xstart: false
+rescale_timesteps: false
+rescale_learned_sigmas: false
+timestep_respacing: ''
+image_size: 256
+b_map_min: 0.97
+dataset_mode: "camus"
+preserve_length: false
+add_buffer: false
+
+ema_rate: [0.9,0.99]
+
+schedule_name: "uniform"
+
+drop_rate: 0.0
+
+num_classes: 6
+
+compile: true
+scheduler: null
+optimizer:
+  _target_: torch.optim.Adam
+  _partial_: true
+  lr: 0.00025
