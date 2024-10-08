@@ -28,4 +28,5 @@ tensorboard
 segmentation_models_pytorch
 torchgeo
 wandb
+scikit-learn
 -e.
