@@ -43,7 +43,6 @@ drop_rate: 0.0
 
 num_classes: 6
 
-compile: true
 scheduler: null
 optimizer:
   _target_: torch.optim.Adam
