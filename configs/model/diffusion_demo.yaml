@@ -24,4 +24,4 @@ criterion:
 optimizer:
   _target_: torch.optim.Adam
   _partial_: true
-  lr: 0.001
+  lr: 0.00025
