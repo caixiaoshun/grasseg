@@ -16,7 +16,7 @@ from torch.utils.data import Dataset
 
 class Grass(Dataset):
     METAINFO = dict(
-        classes=("背景", "低覆盖度", "中低覆盖度","中覆盖度", "中高覆盖度", "高覆盖度"),
+        classes=("backgroud", "low", "middle-low","middle", "middle-high", "high"),
         palette=(
             (255, 255, 255),  #  荒地
             (185,101,71),  #  低覆盖度
@@ -45,8 +45,8 @@ class Grass(Dataset):
         self.image_paths, self.mask_paths = self.__load_data()
 
     def __load_data(self):
-        image_paths = glob(os.path.join(self.root, self.phase, "img", "*.tif"))
-        masks = [filename.replace("img", "ann") for filename in image_paths]
+        image_paths = glob(os.path.join(self.root, "img_dir", self.phase,"*.tif"))
+        masks = [filename.replace("img_dir", "ann_dir") for filename in image_paths]
         return image_paths, masks
 
     def __len__(self):

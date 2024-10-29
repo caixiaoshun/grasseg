@@ -42,16 +42,22 @@ def create_dataset(
     """
     划分数据集，将标注信息转换为图片，并保存至指定路径
     """
-    base_path = os.path.join(output_dir, phase)
     for image_path, ann_path in track(
-        zip(image_paths, ann_paths), description=f"{phase} dataset",total=len(image_paths)
+        zip(image_paths, ann_paths),
+        description=f"{phase} dataset",
+        total=len(image_paths),
     ):
         ann_save_path = os.path.join(
-            base_path, "ann", os.path.basename(ann_path).replace(".json", ".tif")
+            output_dir,
+            "ann_dir",
+            phase,
+            os.path.basename(ann_path).replace(".json", ".tif"),
         )
 
         # 将image复制到指定路径
-        new_image_path = os.path.join(base_path, "img", os.path.basename(image_path))
+        new_image_path = os.path.join(
+            output_dir, "img_dir", phase, os.path.basename(image_path)
+        )
         shutil.copy(image_path, new_image_path)
 
         # 将ann保存到指定路径
@@ -91,34 +97,45 @@ def split_dataset(
     print(f"images: {len(image_paths)}, annotations: {len(ann_paths)}")
 
     image_train, image_test, ann_train, ann_test = train_test_split(
-        image_paths, ann_paths, train_size=split_ratio, random_state=seed,shuffle=shuffle
+        image_paths,
+        ann_paths,
+        train_size=split_ratio,
+        random_state=seed,
+        shuffle=shuffle,
     )
     print(f"train: {len(image_train)}, test: {len(image_test)}")
 
-    os.makedirs(os.path.join(output_path, "train", "img"), exist_ok=True)
-    os.makedirs(os.path.join(output_path, "val", "img"), exist_ok=True)
-    os.makedirs(os.path.join(output_path, "train", "ann"), exist_ok=True)
-    os.makedirs(os.path.join(output_path, "val", "ann"), exist_ok=True)
+    os.makedirs(os.path.join(output_path, "img_dir", "train"), exist_ok=True)
+    os.makedirs(os.path.join(output_path, "img_dir", "val"), exist_ok=True)
+    os.makedirs(os.path.join(output_path, "ann_dir", "train"), exist_ok=True)
+    os.makedirs(os.path.join(output_path, "ann_dir", "val"), exist_ok=True)
 
     create_dataset(image_train, ann_train, "train", output_path)
     create_dataset(image_test, ann_test, "val", output_path)
 
+
 def main():
     args = argparse.ArgumentParser()
-    args.add_argument("--root",type=str,default="data/raw_data")
-    args.add_argument("--output",type=str,default="data/grass")
-    args.add_argument("--split_ratio",type=float,default=0.8)
-    args.add_argument("--seed",type=int,default=42)
-    args.add_argument("--shuffle",type=bool,default=True)
+    args.add_argument("--root", type=str, default="data/raw_data")
+    args.add_argument("--output", type=str, default="data/grass")
+    args.add_argument("--split_ratio", type=float, default=0.8)
+    args.add_argument("--seed", type=int, default=42)
+    args.add_argument("--shuffle", type=bool, default=True)
     args = args.parse_args()
 
-    root:str = args.root
-    output_path:str = args.output
-    split_ratio:float = args.split_ratio
-    seed:int = args.seed
-    shuffle:bool = args.shuffle
+    root: str = args.root
+    output_path: str = args.output
+    split_ratio: float = args.split_ratio
+    seed: int = args.seed
+    shuffle: bool = args.shuffle
 
-    split_dataset(root_path=root,output_path=output_path,split_ratio=split_ratio,shuffle=shuffle,seed=seed)
+    split_dataset(
+        root_path=root,
+        output_path=output_path,
+        split_ratio=split_ratio,
+        shuffle=shuffle,
+        seed=seed,
+    )
 
     print("数据集划分完成")
 
