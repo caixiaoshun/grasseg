@@ -1,6 +1,6 @@
 _base_ = [
     '../_base_/models/upernet_swin.py', '../_base_/datasets/grass.py',
-    '../_base_/default_runtime.py', '../_base_/schedules/schedule_240k.py'
+    '../_base_/default_runtime.py', '../_base_/schedules/grass_scedule.py'
 ]
 
 norm_cfg = dict(type='BN', requires_grad=True)
