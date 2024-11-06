@@ -19,6 +19,7 @@ from .tokenizer import tokenize
 from .typing_utils import (ConfigType, ForwardResults, MultiConfig,
                            OptConfigType, OptMultiConfig, OptSampleList,
                            SampleList, TensorDict, TensorList)
+from .draw import give_colors_to_mask,pasteImages,draw_text_in_image
 
 # isort: off
 from .mask_classification import MatchMasks, seg_data_to_instance_data
@@ -67,4 +68,7 @@ __all__ = [
     'MatchMasks',
     'bdd100k_classes',
     'bdd100k_palette',
+    'give_colors_to_mask',
+    'pasteImages',
+    'draw_text_in_image'
 ]
