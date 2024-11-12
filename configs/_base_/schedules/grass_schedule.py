@@ -12,25 +12,25 @@ optim_wrapper = dict(
 )
 # learning policy
 param_scheduler = [
-    dict(type="LinearLR", start_factor=1e-3, by_epoch=True, begin=0, end=50),
+    dict(type="LinearLR", start_factor=1e-6, by_epoch=False, begin=0, end=230*5),
     dict(
         type="PolyLR",
         eta_min=0.0,
         power=0.9,
-        begin=50,
-        end=500,
-        by_epoch=True,
+        begin=230*5,
+        end=23000,
+        by_epoch=False,
     ),
 ]
 # training schedule for 320k
 train_cfg = dict(
-    type='EpochBasedTrainLoop', max_epochs=500, val_begin=1,val_interval=1)
+    type='IterBasedTrainLoop', max_iters=23000, val_interval=230)
 val_cfg = dict(type='ValLoop')
 test_cfg = dict(type='TestLoop')
 default_hooks = dict(
     timer=dict(type='IterTimerHook'),
-    logger=dict(type='LoggerHook', interval=23, log_metric_by_epoch=True),
+    logger=dict(type='LoggerHook', interval=23, log_metric_by_epoch=False),
     param_scheduler=dict(type='ParamSchedulerHook'),
-    checkpoint=dict(type='CheckpointHook', by_epoch=True, interval=1,save_best=['mIoU'],rule=['greater'],max_keep_ckpts=1),
+    checkpoint=dict(type='CheckpointHook', by_epoch=False, interval=230,save_best=['mIoU'],rule=['greater'],max_keep_ckpts=1),
     sampler_seed=dict(type='DistSamplerSeedHook'),
     visualization=dict(type='SegVisualizationHook'))
